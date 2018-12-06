@@ -9,8 +9,7 @@ function getCookies () {
 }
 var cookieInfo = getCookies ()
 
-if(!cookieInfo.email) {
-    var formReg = document.querySelector ( ".reg-container" )
+var formReg = document.querySelector ( ".reg-container" )
 var formSign = document.querySelector ( ".sign-container" )
 var btnReg = document.querySelector ( "#registration" )
 var btnSignIn = document.querySelector ( "#sign-in" )
@@ -34,16 +33,24 @@ function hideButtons ( param ) {
     formReg.style.display = !param ? "none" : "block"
 }
 
+function hideButtonsSignIn (param ) {
+  formSign.style.display = !param ? "none" : "block"
+}
+
+if(!cookieInfo.email) {
+
+function hideButtons ( param ) {
+    var dspl = param ? "none" : "inline-block"
+    btnReg.style.display = dspl
+    btnSignIn.style.display = dspl
+    formReg.style.display = !param ? "none" : "block"
+}
+
 
 function reg ( event ) {
     hideButtons ( true )
     formReg.regim = 0
     title.innerHTML = "Регистрация"
-}
-
-
-function hideButtonsSignIn (param ) {
-  formSign.style.display = !param ? "none" : "block"
 }
 
 
@@ -88,4 +95,6 @@ function signIn ( event ) {
    emailElemsign.onchange = enterPage
 }
 
-} else document.write(`hello ${cookieInfo.email}`)
+} else
+
+document.write(`hello ${cookieInfo.email}`)
