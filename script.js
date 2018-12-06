@@ -37,15 +37,17 @@ function hideButtonsSignIn (param ) {
   formSign.style.display = !param ? "none" : "block"
 }
 
-if(!cookieInfo.email) {
-
-function hideButtons ( param ) {
-    var dspl = param ? "none" : "inline-block"
-    btnReg.style.display = dspl
-    btnSignIn.style.display = dspl
-    formReg.style.display = !param ? "none" : "block"
+function regPage () {
+    hideButtonsSignIn (false)
+    var script = document.createElement( 'script' )
+    script.id = "hello"
+    script.src = 'hello.js'
+    document.head.appendChild( script )
+    title.innerHTML = nameElem.value
 }
 
+
+if(!cookieInfo.email) {
 
 function reg ( event ) {
     hideButtons ( true )
@@ -53,12 +55,12 @@ function reg ( event ) {
     title.innerHTML = "Регистрация"
 }
 
-
 function testUserData () {
     if ( !nameElem.value || !passElem.value || !emailElem.value || !avatarElem.value ) return
     var userKey = Sha256.hash ( passElem.value + emailElem.value)
     var key = users.some ( x => x.key=== userKey )
       document.cookie = `email=${emailElem.value}`
+      document.cookie = `name=${nameElem.value}`
       if (!key){
           users.push ({key:`${userKey}`,name:`${nameElem.value}`,email:`${emailElem.value}`,avatar:`${avatarElem.value}`})
           title.innerHTML = `Регистрация ${nameElem.value} прошла успешно`
@@ -80,12 +82,7 @@ function enterPage (event) {
 
 function getRegPage () {
 if (user_Key === users.filter( function (x) {if (x.key=== user_Key) return x})[0].key) {
-    hideButtonsSignIn (false)
-    var script = document.createElement( 'script' )
-    script.id = "hello"
-    script.src = 'hello.js'
-    document.head.appendChild( script )
-    title.innerHTML = nameElem.value
+    regPage()
    }
 }
 
@@ -95,6 +92,4 @@ function signIn ( event ) {
    emailElemsign.onchange = enterPage
 }
 
-} else
-
-document.write(`hello ${cookieInfo.email}`)
+} else regPage()
