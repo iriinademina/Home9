@@ -38,12 +38,10 @@ function hideButtonsSignIn (param ) {
 }
 
 function regPage () {
-    hideButtonsSignIn (false)
     var script = document.createElement( 'script' )
-    script.id = "hello"
-    script.src = 'hello.js'
+    script.id = "helloCookie"
+    script.src = 'helloCookie.js'
     document.head.appendChild( script )
-    title.innerHTML = nameElem.value
 }
 
 
@@ -61,6 +59,7 @@ function testUserData () {
     var key = users.some ( x => x.key=== userKey )
       document.cookie = `email=${emailElem.value}`
       document.cookie = `name=${nameElem.value}`
+      document.cookie = `avatar=${avatarElem.value}`
       if (!key){
           users.push ({key:`${userKey}`,name:`${nameElem.value}`,email:`${emailElem.value}`,avatar:`${avatarElem.value}`})
           title.innerHTML = `Регистрация ${nameElem.value} прошла успешно`
@@ -82,7 +81,12 @@ function enterPage (event) {
 
 function getRegPage () {
 if (user_Key === users.filter( function (x) {if (x.key=== user_Key) return x})[0].key) {
-    regPage()
+    hideButtonsSignIn (false)
+    var script = document.createElement( 'script' )
+    script.id = "hello"
+    script.src = 'hello.js'
+    document.head.appendChild( script )
+    title.innerHTML = nameElem.value
    }
 }
 
