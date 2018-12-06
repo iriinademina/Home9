@@ -38,10 +38,19 @@ function hideButtonsSignIn (param ) {
 }
 
 function regPage () {
-    var script = document.createElement( 'script' )
-    script.id = "helloCookie"
-    script.src = 'helloCookie.js'
-    document.head.appendChild( script )
+  var elem = document.body.appendChild (document.createElement('div'))
+  var p = elem.appendChild (document.createElement('p'))
+  p.innerHTML = `Hello ${cookieInfo.name}`
+  p.style.color = "#33ccff"
+  var img = document.body.appendChild (document.createElement('img'))
+  img.src = `${cookieInfo.avatar}`
+  img.style =
+          `
+            display: "block";
+            width: 100px;
+            height: 100px;
+           `
+  elem.appendChild(img)
 }
 
 
